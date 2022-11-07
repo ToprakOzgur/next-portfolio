@@ -45,7 +45,7 @@ const Skills = () => {
                   <h4 className="bold-text">{experience.fields.pos}</h4>
                   <p className="p-text">{experience.fields.company}</p>
                 </motion.div>
-                <ReactTooltip id={experience.fields.startDate} effect="solid" arrowColor="#fff" className="skills-tooltip">
+                <ReactTooltip uuid="mytt" id={experience.fields.startDate} effect="solid" arrowColor="#fff" className="skills-tooltip">
                   {experience.fields.desc}
                 </ReactTooltip>
               </motion.div>
