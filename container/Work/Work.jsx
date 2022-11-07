@@ -6,13 +6,13 @@ import { AppWrap, MotionWrap } from "../../wrapper";
 import { DataContext } from "../../contexts/dataContext";
 
 const Work = () => {
-  const { items: areas, allProjects } = useContext(DataContext);
+  const { areas, projects: allProjects } = useContext(DataContext);
   const [projects, setProjects] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Web");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
   useEffect(() => {
-    const selected = areas.find((area) => area.fields.name.includes(activeFilter));
+    const selected = areas?.find((area) => area.fields.name.includes(activeFilter));
     setProjects(activeFilter === "All" ? [] : selected?.fields.projects?.sort((a, b) => a.fields.order - b.fields.order));
   }, [activeFilter, areas, allProjects]);
 
@@ -38,7 +38,7 @@ const Work = () => {
       </h2>
 
       <div className="app__work-filter">
-        {areas.map((item, index) => (
+        {areas?.map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item.fields.name)}

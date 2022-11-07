@@ -4,7 +4,6 @@ import { Navbar } from "../components";
 import { About, Contact, Header, Skills, Work } from "../container";
 
 import { DataContextProvider } from "../contexts/dataContext";
-import { createClient } from "contentful";
 
 export async function getServerSideProps() {
   // const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
@@ -16,22 +15,49 @@ export async function getServerSideProps() {
     host: process.env.NEXT_PUBLIC_HOST,
     //     # HOST: "cdn.contentful.com"
   });
-  const projects = await client.getEntries({
+  const projectsRes = await client.getEntries({
     content_type: "project",
     select: "fields",
     order: "fields.order",
   });
 
-  const data = projects.items;
+  const areasRes = await client.getEntries({
+    content_type: "area",
+    select: "fields",
+    order: "fields.order",
+  });
+
+  const skillsRes = await client.getEntries({
+    content_type: "skill",
+    select: "fields",
+    order: "fields.name",
+  });
+
+  const experiencesRes = await client.getEntries({
+    content_type: "exp",
+    select: "fields",
+    order: "fields.order",
+  });
+
+  const resumeRes = await client.getEntries({
+    content_type: "resume",
+    select: "fields",
+  });
+  const data = {
+    projects: projectsRes.items,
+    areas: areasRes.items,
+    skills: skillsRes.items,
+    experiences: experiencesRes.items,
+    resume: resumeRes.includes?.Asset[0]?.fields?.file?.url,
+  };
 
   return { props: { data } };
 }
 
 export default function Home({ data }) {
-  console.log("data", data);
   return (
     <div className="app">
-      <DataContextProvider>
+      <DataContextProvider data={data}>
         <Head>
           <title>Ozgur Toprak</title>
           <meta name="description" content="Ozgur Toprak Portfolio" />

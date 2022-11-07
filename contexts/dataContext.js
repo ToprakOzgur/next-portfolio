@@ -3,35 +3,38 @@ import useContentful from "../hooks/useContentful";
 
 export const DataContext = createContext();
 
-export const DataContextProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
-  const [skills, setSkills] = useState([]);
-  const [experiences, setExperiences] = useState([]);
-  const [allProjects, setAllProjects] = useState([]);
-  const [resume, setResume] = useState("");
-  const { getAreas, getSkills, getExperiences, getProjects, getResume } = useContentful();
+export const DataContextProvider = ({ children, data }) => {
+  const { projects, areas, skills, experiences, resume } = data;
 
-  useEffect(() => {
-    getAreas().then((response) => {
-      setItems(response.items);
-    });
+  // const [items, setItems] = useState([]);
+  // const [skills, setSkills] = useState([]);
+  // const [experiences, setExperiences] = useState([]);
+  // const [allProjects, setAllProjects] = useState([]);
+  // const [resume, setResume] = useState("");
+  // const { getAreas, getSkills, getExperiences, getProjects, getResume } = useContentful();
 
-    getSkills().then((response) => {
-      setSkills(response.items);
-    });
+  // useEffect(() => {
+  //   getAreas().then((response) => {
+  //     setItems(response.items);
+  //   });
 
-    getExperiences().then((response) => {
-      setExperiences(response.items);
-    });
+  //   getSkills().then((response) => {
+  //     setSkills(response.items);
+  //   });
 
-    getProjects().then((response) => {
-      setAllProjects(response.items);
-    });
+  //   getExperiences().then((response) => {
+  //     setExperiences(response.items);
+  //   });
 
-    getResume().then((response) => {
-      setResume(response.includes?.Asset[0]?.fields?.file?.url);
-    });
-  }, []);
+  //   getProjects().then((response) => {
+  //     setAllProjects(response.items);
+  //   });
 
-  return <DataContext.Provider value={{ items, skills, experiences, allProjects, resume }}>{children}</DataContext.Provider>;
+  //   getResume().then((response) => {
+  //     setResume(response.includes?.Asset[0]?.fields?.file?.url);
+  //   });
+  // }, []);
+
+  return <DataContext.Provider value={{ projects, areas, skills, experiences, resume }}>{children}</DataContext.Provider>;
+  // return <DataContext.Provider value={{ items, skills, experiences, allProjects, resume }}>{children}</DataContext.Provider>;
 };

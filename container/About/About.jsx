@@ -8,7 +8,7 @@ import { DataContext } from "../../contexts/dataContext";
 import { v4 as uuidv4 } from "uuid";
 
 const About = () => {
-  const { items } = useContext(DataContext);
+  const { areas } = useContext(DataContext);
 
   return (
     <>
@@ -18,7 +18,7 @@ const About = () => {
       </h2>
 
       <div className="app__profiles">
-        {items.map((item) => (
+        {areas.map((item) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
