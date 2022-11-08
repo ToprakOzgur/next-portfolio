@@ -1087,6 +1087,14 @@
       width: 100%;
       margin: 1rem;
     }
+
+    ul {
+      padding: 0.5rem 1rem;
+      align-self: flex-start;
+      li {
+        list-style: square;
+      }
+    }
   }
 }
 
@@ -1159,11 +1167,15 @@
   }
 
   .app__work-tag {
-    // position: absolute;
-
-    // padding: 0.5rem 1rem;
-    // border-radius: 10px;
-    // background-color: #fff;
-    // bottom: -50px;
+    position: absolute;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: #fff;
+    top: -30px;
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--brown-color);
+    }
   }
 }

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { DataContext } from "../../contexts/dataContext";
-
+import { v4 as uuidv4 } from "uuid";
 const Work = () => {
   const { areas, projects: allProjects } = useContext(DataContext);
   const [projects, setProjects] = useState([]);
@@ -14,7 +14,8 @@ const Work = () => {
   useEffect(() => {
     const selected = areas?.find((area) => area.fields.name.includes(activeFilter));
     setProjects(activeFilter === "All" ? [] : selected?.fields.projects?.sort((a, b) => a.fields.order - b.fields.order));
-  }, [activeFilter, areas, allProjects]);
+    console.log(projects);
+  }, [activeFilter, areas, projects]);
 
   const handleWorkFilter = (item) => {
     setAnimateCard([{ y: 100, opacity: 0 }]);
@@ -88,10 +89,17 @@ const Work = () => {
                   {work?.fields.description}
                 </p>
 
-                {/* <div className="app__work-tag app__flex">
-                  <p className="p-text">{"work"}</p>
-                </div> */}
+                <div className="app__work-tag app__flex">
+                  <p className="p-text">{work.fields.tags[0]}</p>
+                </div>
               </div>
+              <ul>
+                {work.fields.tags.map((tag) => (
+                  <li key={uuidv4()} className="p-text">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
       </motion.div>
