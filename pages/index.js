@@ -12,11 +12,11 @@ export async function getServerSideProps() {
     host: process.env.NEXT_PUBLIC_HOST,
     //     # HOST: "cdn.contentful.com"
   });
-  // const projectsRes = await client.getEntries({
-  //   content_type: "project",
-  //   select: "fields",
-  //   order: "fields.order",
-  // });
+  const projectsRes = await client.getEntries({
+    content_type: "project",
+    select: "fields",
+    order: "fields.order",
+  });
 
   const areasRes = await client.getEntries({
     content_type: "area",
@@ -30,26 +30,23 @@ export async function getServerSideProps() {
     order: "fields.name",
   });
 
-  // const experiencesRes = await client.getEntries({
-  //   content_type: "exp",
-  //   select: "fields",
-  //   order: "fields.order",
-  // });
+  const experiencesRes = await client.getEntries({
+    content_type: "exp",
+    select: "fields",
+    order: "fields.order",
+  });
 
-  // const resumeRes = await client.getEntries({
-  //   content_type: "resume",
-  //   select: "fields",
-  // });
+  const resumeRes = await client.getEntries({
+    content_type: "resume",
+    select: "fields",
+  });
 
   const data = {
-    projects: null,
-    // projects: projectsRes.items,
+    projects: projectsRes.items,
     areas: areasRes.items,
     skills: skillsRes.items,
-    experiences: null,
-    // experiences: experiencesRes.items,
-    // resume: resumeRes.includes?.Asset[0]?.fields?.file?.url,
-    resume: "deneme",
+    experiences: experiencesRes.items,
+    resume: resumeRes.includes?.Asset[0]?.fields?.file?.url,
   };
 
   return { props: { data } };
