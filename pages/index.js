@@ -11,35 +11,61 @@ export async function getServerSideProps() {
     accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
     host: process.env.NEXT_PUBLIC_HOST,
     //     # HOST: "cdn.contentful.com"
+    // NEXT_PUBLIC_HOST="preview.contentful.com"
   });
-  const projectsRes = await client.getEntries({
-    content_type: "project",
-    select: "fields",
-    order: "fields.order",
-  });
+  let projectsRes, areasRes, skillsRes, experiencesRes, resumeRes;
+  try {
+    projectsRes = await client.getEntries({
+      content_type: "project",
+      select: "fields",
+      order: "fields.order",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  try {
+    areasRes = await client.getEntries({
+      content_type: "area",
+      select: "fields",
+      order: "fields.order",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 
-  const areasRes = await client.getEntries({
-    content_type: "area",
-    select: "fields",
-    order: "fields.order",
-  });
+  try {
+    skillsRes = await client.getEntries({
+      content_type: "skill",
+      select: "fields",
+      order: "fields.name",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 
-  const skillsRes = await client.getEntries({
-    content_type: "skill",
-    select: "fields",
-    order: "fields.name",
-  });
+  try {
+    experiencesRes = await client.getEntries({
+      content_type: "exp",
+      select: "fields",
+      order: "fields.order",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 
-  const experiencesRes = await client.getEntries({
-    content_type: "exp",
-    select: "fields",
-    order: "fields.order",
-  });
-
-  const resumeRes = await client.getEntries({
-    content_type: "resume",
-    select: "fields",
-  });
+  try {
+    resumeRes = await client.getEntries({
+      content_type: "resume",
+      select: "fields",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 
   const data = {
     projects: projectsRes.items,
