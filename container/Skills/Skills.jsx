@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { images } from "../../constants";
+
 import { DataContext } from "../../contexts/dataContext";
 
 const Skills = () => {
-  const { skills, experiences, resume } = useContext(DataContext);
+  const { skills, experiences } = useContext(DataContext);
 
   return (
     <>
