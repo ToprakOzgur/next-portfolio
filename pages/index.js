@@ -10,8 +10,6 @@ export async function getServerSideProps() {
     space: process.env.NEXT_PUBLIC_SPACE_KEY,
     accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
     host: process.env.NEXT_PUBLIC_HOST,
-    //     # HOST: "cdn.contentful.com"
-    // NEXT_PUBLIC_HOST="preview.contentful.com"
   });
   let projectsRes, areasRes, skillsRes, experiencesRes, resumeRes;
   try {
@@ -20,44 +18,21 @@ export async function getServerSideProps() {
       select: "fields",
       order: "fields.order",
     });
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-  try {
     areasRes = await client.getEntries({
       content_type: "area",
       select: "fields",
       order: "fields.order",
     });
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-
-  try {
     skillsRes = await client.getEntries({
       content_type: "skill",
       select: "fields",
       order: "fields.name",
     });
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-
-  try {
     experiencesRes = await client.getEntries({
       content_type: "exp",
       select: "fields",
       order: "fields.order",
     });
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-
-  try {
     resumeRes = await client.getEntries({
       content_type: "resume",
       select: "fields",
