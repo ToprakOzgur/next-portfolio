@@ -26,31 +26,32 @@ const Skills = () => {
             ))}
         </motion.div>
         <div className="app__skills-exp">
-          {experiences.map((experience) => (
-            <motion.div className="app__skills-exp-item" key={experience.fields.startDate}>
-              <div className="app__skills-exp-year">
-                <span className="bold-text">{moment(experience.fields.startDate).format("MM/YYYY")} </span>
-                <span className="bold-text">-</span>
-                <span className="bold-text"> {moment(experience.fields.endDate).format("MM/YYYY")}</span>
-              </div>
-              <motion.div className="app__skills-exp-works">
-                <motion.div
-                  whileInView={{ opacity: [0, 1] }}
-                  transition={{ duration: 0.5 }}
-                  className="app__skills-exp-work"
-                  data-tip
-                  data-for={experience.fields.startDate}
-                  key={experience.fields.startDate}
-                >
-                  <h4 className="bold-text">{experience.fields.pos}</h4>
-                  <p className="p-text">{experience.fields.company}</p>
+          {experiences &&
+            experiences.map((experience) => (
+              <motion.div className="app__skills-exp-item" key={experience.fields.startDate}>
+                <div className="app__skills-exp-year">
+                  <span className="bold-text">{moment(experience.fields.startDate).format("MM/YYYY")} </span>
+                  <span className="bold-text">-</span>
+                  <span className="bold-text"> {moment(experience.fields.endDate).format("MM/YYYY")}</span>
+                </div>
+                <motion.div className="app__skills-exp-works">
+                  <motion.div
+                    whileInView={{ opacity: [0, 1] }}
+                    transition={{ duration: 0.5 }}
+                    className="app__skills-exp-work"
+                    data-tip
+                    data-for={experience.fields.startDate}
+                    key={experience.fields.startDate}
+                  >
+                    <h4 className="bold-text">{experience.fields.pos}</h4>
+                    <p className="p-text">{experience.fields.company}</p>
+                  </motion.div>
+                  <ReactTooltip uuid="mytt" id={experience.fields.startDate} effect="solid" arrowColor="#fff" className="skills-tooltip">
+                    {experience.fields.desc}
+                  </ReactTooltip>
                 </motion.div>
-                <ReactTooltip uuid="mytt" id={experience.fields.startDate} effect="solid" arrowColor="#fff" className="skills-tooltip">
-                  {experience.fields.desc}
-                </ReactTooltip>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
         </div>
       </div>
     </>
