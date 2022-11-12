@@ -17,7 +17,6 @@ const Contact = () => {
             zgrtprk@gmail.com
           </a>
         </div>
-        {/* <div className="app__footer-card" onClick={() => window.open(`https:${resume}`, "_blank", "noopener,noreferrer")}> */}
         <div className="app__footer-card" onClick={() => window.open(`https:${resume}`, "_blank", "noopener,noreferrer")}>
           <a className="p-text" href={`https:${resume}`} target="_blank" rel="noreferrer">
             My Resume

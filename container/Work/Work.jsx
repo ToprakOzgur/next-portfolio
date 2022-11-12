@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useContext } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { DataContext } from "../../contexts/dataContext";
 import { v4 as uuidv4 } from "uuid";
+
 const Work = () => {
   const { areas, projects: allProjects } = useContext(DataContext);
   const [projects, setProjects] = useState([]);
@@ -96,7 +98,7 @@ const Work = () => {
               <ul>
                 {work.fields.tags.map((tag) => (
                   <li key={uuidv4()} className="p-text">
-                    {tag}
+                    {"# " + tag}
                   </li>
                 ))}
               </ul>
