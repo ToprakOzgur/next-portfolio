@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useContext } from "react";
-import { AiFillEye, AiFillGithub } from "react-icons/ai";
-import { motion } from "framer-motion";
-
 import { AppWrap, MotionWrap } from "../../wrapper";
+import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { DataContext } from "../../contexts/dataContext";
+
+import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
+
+import styles from "./Work.module.scss";
 
 const Work = () => {
   const { areas, projects: allProjects } = useContext(DataContext);
@@ -40,12 +42,12 @@ const Work = () => {
         <span> Projects</span> and portfolio
       </h2>
 
-      <div className="app__work-filter">
+      <div className={styles.app__workfilter}>
         {areas?.map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item.fields.name)}
-            className={`app__work-filter-item app__flex p-text ${activeFilter === item.fields.name ? "item-active" : ""}`}
+            className={`${styles.app__workfilteritem} app__flex p-text ${activeFilter === item.fields.name ? styles.itemactive : ""}`}
           >
             {item.fields.name}
           </div>
@@ -54,23 +56,23 @@ const Work = () => {
         <div
           key={"all"}
           onClick={() => handleWorkFilter("All")}
-          className={`app__work-filter-item app__flex p-text ${activeFilter === "All" ? "item-active" : ""}`}
+          className={`${styles.app__workfilteritem} app__flex p-text ${activeFilter === "All" ? styles.itemactive : ""}`}
         >
           All
         </div>
       </div>
 
-      <motion.div animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.5 }} className="app__work-portfolio">
+      <motion.div animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.5 }} className={styles.app__workportfolio}>
         {allProjects &&
           getSelectedProjects().map((work, index) => (
-            <div className="app__work-item app__flex" key={index}>
-              <div className="app__work-img app__flex">
+            <div className={`${styles.app__workitem} app__flex`} key={index}>
+              <div className={`${styles.app__workimg} app__flex`}>
                 <img src={work.fields.screenShot?.fields?.file.url} alt={work.fields.title} />
 
                 <motion.div
                   whileHover={{ opacity: [0, 1] }}
                   transition={{ duration: 0.25, ease: "easeInOut", staggerChildren: 0.5 }}
-                  className="app__work-hover app__flex"
+                  className={`${styles.app__workhover} app__flex`}
                 >
                   <a href={work.fields.projectLink} target="_blank" rel="noreferrer">
                     <motion.div whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }} className="app__flex">
@@ -85,13 +87,13 @@ const Work = () => {
                 </motion.div>
               </div>
 
-              <div className="app__work-content app__flex">
+              <div className={`${styles.app__workcontent} app__flex`}>
                 <h4 className="bold-text">{work.fields.title}</h4>
                 <p className="p-text" style={{ marginTop: 10 }}>
                   {work?.fields.description}
                 </p>
 
-                <div className="app__work-tag app__flex">
+                <div className={`${styles.app__worktag} app__flex`}>
                   <p className="p-text">{work.fields.tags[0]}</p>
                 </div>
               </div>
@@ -109,4 +111,4 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "work", "app__primarybg");
+export default AppWrap(MotionWrap(Work, `${styles.app__works}`), "work", "app__primarybg");

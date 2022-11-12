@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
+import { AppWrap, MotionWrap } from "../../wrapper";
+import { DataContext } from "../../contexts/dataContext";
+
 import { motion } from "framer-motion";
 import ReactTooltip from "react-tooltip";
 import moment from "moment";
-import { AppWrap, MotionWrap } from "../../wrapper";
 
-import { DataContext } from "../../contexts/dataContext";
-
+import styles from "./Skills.module.scss";
 const Skills = () => {
   const { skills, experiences } = useContext(DataContext);
 
@@ -13,11 +14,11 @@ const Skills = () => {
     <>
       <h2 className="head-text">Skills & Experiences</h2>
 
-      <div className="app__skills-container">
-        <motion.div className="app__skills-list">
+      <div className={`${styles.app__skillscontainer}`}>
+        <motion.div className={`${styles.app__skillslist}`}>
           {skills &&
             skills.map((skill, index) => (
-              <motion.div whileInView={{ opacity: [0, 1] }} transition={{ duration: 0.5 }} className="app__skills-item app__flex" key={index}>
+              <motion.div whileInView={{ opacity: [0, 1] }} transition={{ duration: 0.5 }} className={`${styles.app__skillsitem} app__flex`} key={index}>
                 <div className="app__flex" style={{ backgroundColor: skill.bgColor }}>
                   <img src={"https:" + skill.fields.icon.fields.file.url} alt={skill.fields.name} />
                 </div>
@@ -25,20 +26,20 @@ const Skills = () => {
               </motion.div>
             ))}
         </motion.div>
-        <div className="app__skills-exp">
+        <div className={`${styles.app__skillsexp}`}>
           {experiences &&
             experiences.map((experience) => (
-              <motion.div className="app__skills-exp-item" key={experience.fields.startDate}>
-                <div className="app__skills-exp-year">
+              <motion.div className={`${styles.app__skillsexpitem}`} key={experience.fields.startDate}>
+                <div className={`${styles.app__skillsexpyear}`}>
                   <span className="bold-text">{moment(experience.fields.startDate).format("MM/YYYY")} </span>
                   <span className="bold-text">-</span>
                   <span className="bold-text"> {moment(experience.fields.endDate).format("MM/YYYY")}</span>
                 </div>
-                <motion.div className="app__skills-exp-works">
+                <motion.div className={`${styles.app__skillsexpworks}`}>
                   <motion.div
                     whileInView={{ opacity: [0, 1] }}
                     transition={{ duration: 0.5 }}
-                    className="app__skills-exp-work"
+                    className={`${styles.app__skillsexpwork}`}
                     data-tip
                     data-for={experience.fields.startDate}
                     key={experience.fields.startDate}
@@ -46,7 +47,7 @@ const Skills = () => {
                     <h4 className="bold-text">{experience.fields.pos}</h4>
                     <p className="p-text">{experience.fields.company}</p>
                   </motion.div>
-                  <ReactTooltip uuid="mytt" id={experience.fields.startDate} effect="solid" arrowColor="#fff" className="skills-tooltip">
+                  <ReactTooltip uuid="mytt" id={experience.fields.startDate} effect="solid" arrowColor="#fff" className={styles.skillstooltip}>
                     {experience.fields.desc}
                   </ReactTooltip>
                 </motion.div>
@@ -58,4 +59,4 @@ const Skills = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Skills, "app__skills"), "skills", "app__whitebg");
+export default AppWrap(MotionWrap(Skills, styles.app__skills), "skills", "app__whitebg");

@@ -1,8 +1,9 @@
 import { BsTwitter, BsInstagram, BsGithub } from "react-icons/bs";
 import { FaXing, FaLinkedin } from "react-icons/fa";
+import styles from "./SocialMedia.module.scss";
 
 const SocialMedia = () => (
-  <div className="app__social">
+  <div className={`${styles.app__social}`}>
     <div>
       <a target="_blank" rel="noreferrer" href="https://github.com/ToprakOzgur">
         <BsGithub />

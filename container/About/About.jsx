@@ -6,7 +6,7 @@ import { AppWrap, MotionWrap } from "../../wrapper";
 
 import { DataContext } from "../../contexts/dataContext";
 import { v4 as uuidv4 } from "uuid";
-
+import styles from "./About.module.scss";
 const About = () => {
   const { areas } = useContext(DataContext);
 
@@ -17,13 +17,13 @@ const About = () => {
         <span>professional expertise</span>
       </h2>
 
-      <div className="app__profiles">
+      <div className={`${styles.app__profiles}`}>
         {areas.map((item) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5, type: "tween" }}
-            className="app__profile-item"
+            className={`${styles.app__profileitem}`}
             key={uuidv4()}
           >
             <img src={"https:" + item.fields.icon.fields.file.url} alt={item.title} />
@@ -36,4 +36,4 @@ const About = () => {
   );
 };
 
-export default AppWrap(MotionWrap(About, "app__about"), "about", "app__whitebg");
+export default AppWrap(MotionWrap(About, styles.app__about), "about", "app__whitebg");
